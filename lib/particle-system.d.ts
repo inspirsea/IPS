@@ -1,5 +1,5 @@
 import { IpsOptions } from "./model/ips-options";
-import { EmitterOptions } from "./model/emitter-options";
+import { IpsEmitterOptions } from "./model/ips-emitter-options";
 import { Observable } from "rxjs/Observable";
 export declare class ParticleSystem {
     onLoad: Observable<string>;
@@ -8,7 +8,7 @@ export declare class ParticleSystem {
     private time;
     private delta;
     constructor(options: IpsOptions, canvas: HTMLCanvasElement);
-    addEmitter(options: EmitterOptions): void;
+    addEmitter(options: IpsEmitterOptions): void;
     update(): void;
     render(): void;
 }

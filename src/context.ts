@@ -126,7 +126,9 @@ export class Context {
     attribute vec3 a_velocity;
     attribute float a_startTime;
     attribute float a_lifetime;
+    attribute float a_size;
     
+    uniform float u_growth;
     uniform float u_time;
     varying float v_lifetime;
     
@@ -139,9 +141,7 @@ export class Context {
         gl_Position = vec4(-1000, -1000, 0, 0);
       }
     
-      v_lifetime = 1.0 - (a_startTime / a_lifetime);
-      v_lifetime = clamp(v_lifetime, 0.0, 1.0);
-      gl_PointSize = 10.0;
+      gl_PointSize = a_size + (time * u_growth);
     }
     `;
 
@@ -149,7 +149,6 @@ export class Context {
     precision mediump float;
     
       uniform vec4 u_color;
-      varying float v_lifetime;
     
       uniform sampler2D u_particleTexture;
     

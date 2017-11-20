@@ -1,7 +1,7 @@
 import { MinMax } from "./min-max";
 import { RenderMode } from "./render-mode";
 import { IpsCoordinates } from "./ips-coordinates";
-export interface EmitterOptions {
+export interface IpsEmitterOptions {
     start: IpsCoordinates;
     velocity: IpsCoordinates;
     lifeTime: MinMax<number>;

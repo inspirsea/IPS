@@ -1,7 +1,7 @@
 import { ParticleEmitter } from "./particle-emitter";
 import { Context } from "./context";
 import { IpsOptions } from "./model/ips-options";
-import { EmitterOptions } from "./model/emitter-options";
+import { IpsEmitterOptions } from "./model/ips-emitter-options";
 import { Observable } from "rxjs/Observable";
 
 export class ParticleSystem {
@@ -17,7 +17,7 @@ export class ParticleSystem {
         this.onLoad = this.context.onLoad();
     }
 
-    public addEmitter(options: EmitterOptions) {
+    public addEmitter(options: IpsEmitterOptions) {
         this.particleEmitters.push(new ParticleEmitter(this.context, options));
     }
 

@@ -1,5 +1,5 @@
 import { Context } from "./context";
-import { EmitterOptions } from "./model/emitter-options";
+import { IpsEmitterOptions } from "./model/ips-emitter-options";
 export declare class ParticleEmitter {
     private context;
     private options;
@@ -9,13 +9,18 @@ export declare class ParticleEmitter {
     private velocity;
     private startTime;
     private lifeTime;
+    private size;
+    private growth;
     private color;
     private renderer;
     private renderCall;
-    constructor(context: Context, options: EmitterOptions);
+    private updateParticles;
+    constructor(context: Context, options: IpsEmitterOptions);
     update(delta: number): void;
     render(time: number): void;
     private initPool(options);
     private generateParticles(nrOfParticles);
+    private setParticleValues(startTime);
+    private setTimeValue(startTime);
     private rand(min, max);
 }

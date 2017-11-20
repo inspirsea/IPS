@@ -2,7 +2,8 @@ import { Particle } from "./particle";
 import { Context } from "./context";
 import { Renderer } from "./renderer";
 import { RenderCall } from "./model/render-call";
-import { EmitterOptions } from "./model/emitter-options";
+import { IpsEmitterOptions } from "./model/ips-emitter-options";
+import { RenderMode } from "./model/render-mode";
 
 export class ParticleEmitter {
 
@@ -12,27 +13,39 @@ export class ParticleEmitter {
     private velocity: Float32Array;
     private startTime: Float32Array;
     private lifeTime: Float32Array;
+    private size: Float32Array;
+    private growth: number;
     private color: [number, number, number, number];
 
     private renderer: Renderer;
     private renderCall: RenderCall;
+    private updateParticles: (startTime: number) => void;
 
-    constructor(private context: Context, private options: EmitterOptions) {
+    constructor(private context: Context, private options: IpsEmitterOptions) {
         this.renderer = new Renderer(this.context);
+
+        if(options.renderMode == RenderMode.Static) {
+            this.updateParticles = this.setTimeValue;
+        } else {
+            this.updateParticles = this.setParticleValues;
+        }
+
         this.initPool(options);
-        
+
         this.renderCall = {
             startPosition: this.startPosition,
             velocity: this.velocity,
             startTime: this.startTime,
             lifeTime: this.lifeTime,
+            size: this.size,
             color: options.color,
-            length: this.length
+            length: this.length,
+            growth: this.growth
         }
     }
 
     public update(delta: number) {
-        let nrOfParticles = Math.floor((this.options.particlesSec/1000) * delta);
+        let nrOfParticles = Math.floor((this.options.particlesSec / 1000) * delta);
         this.generateParticles(nrOfParticles);
         this.renderCall.startTime = this.startTime;
     }
@@ -42,7 +55,7 @@ export class ParticleEmitter {
         this.renderer.render(this.renderCall, time);
     }
 
-    private initPool(options: EmitterOptions) {
+    private initPool(options: IpsEmitterOptions) {
         let avgLifeSpan = (options.lifeTime.min + options.lifeTime.max) / 2;
         this.length = (options.particlesSec / (avgLifeSpan / 1000)) * 1.2;
 
@@ -50,50 +63,49 @@ export class ParticleEmitter {
         this.velocity = new Float32Array(this.length * 3);
         this.lifeTime = new Float32Array(this.length);
         this.startTime = new Float32Array(this.length);
-        
-        for(let i = 0; i < this.length; i++) {
-            let startTime = 0;
-            let index3 = this.index * 3;
-            this.startPosition[index3] = this.rand(this.options.start.min[0], this.options.start.max[0]);
-            this.startPosition[index3 + 1] = this.rand(this.options.start.min[1], this.options.start.max[1]);
-            this.startPosition[index3 + 2] = 0;
+        this.size = new Float32Array(this.length);
+        this.growth = options.growth;
 
-            this.velocity[index3] = this.rand(this.options.velocity.min[0], this.options.velocity.max[0]);
-            this.velocity[index3 + 1] = this.rand(this.options.velocity.min[1], this.options.velocity.max[1]);
-            this.velocity[index3 + 2] = 0;
-            
-            this.startTime[this.index] = startTime;
-            this.lifeTime[this.index] = this.rand(this.options.lifeTime.min, this.options.lifeTime.max);
-
-            if(this.index > this.length) {
-                this.index = 0;
-            } else {
-                this.index++;
-            }
+        for (let i = 0; i < this.length; i++) {
+            this.setParticleValues(0);
         }
     }
 
-    private generateParticles(nrOfParticles: number) {        
+    private generateParticles(nrOfParticles: number) {
         let startTime = +Date.now().toString().slice(5);
-        for(let i = 0; i < nrOfParticles; i++) {
+        for (let i = 0; i < nrOfParticles; i++) {
+            this.updateParticles(startTime);
+        }
+    }
 
-            let index3 = this.index * 3;
-            this.startPosition[index3] = this.rand(this.options.start.min[0], this.options.start.max[0]);
-            this.startPosition[index3 + 1] = this.rand(this.options.start.min[1], this.options.start.max[1]);
-            this.startPosition[index3 + 2] = 0;
+    private setParticleValues(startTime) {
+        let index3 = this.index * 3;
+        this.startPosition[index3] = this.rand(this.options.start.x.min, this.options.start.x.max);
+        this.startPosition[index3 + 1] = this.rand(this.options.start.y.min, this.options.start.y.max);
+        this.startPosition[index3 + 2] = 0;
 
-            this.velocity[index3] = this.rand(this.options.velocity.min[0], this.options.velocity.max[0]);
-            this.velocity[index3 + 1] = this.rand(this.options.velocity.min[1], this.options.velocity.max[1]);
-            this.velocity[index3 + 2] = 0;
-            
-            this.startTime[this.index] = startTime;
-            this.lifeTime[this.index] = this.rand(this.options.lifeTime.min, this.options.lifeTime.max);
+        this.velocity[index3] = this.rand(this.options.velocity.x.min, this.options.velocity.x.max);
+        this.velocity[index3 + 1] = this.rand(this.options.velocity.y.min, this.options.velocity.y.max);
+        this.velocity[index3 + 2] = 0;
 
-            if(this.index > this.length) {
-                this.index = 0;
-            } else {
-                this.index++;
-            }
+        this.size[this.index] = this.rand(this.options.size.min, this.options.size.max);
+        this.startTime[this.index] = startTime;
+        this.lifeTime[this.index] = this.rand(this.options.lifeTime.min, this.options.lifeTime.max);
+
+        if (this.index > this.length) {
+            this.index = 0;
+        } else {
+            this.index++;
+        }
+    }
+
+    private setTimeValue(startTime) {
+        this.startTime[this.index] = startTime;
+        
+        if (this.index > this.length) {
+            this.index = 0;
+        } else {
+            this.index++;
         }
     }
 

@@ -8,6 +8,8 @@ export declare class Renderer {
     private a_velocity_location;
     private a_startTime_location;
     private a_lifetime_location;
+    private a_size_location;
+    private u_growth;
     private u_color;
     private u_time_location;
     private u_particleTexture_location;
@@ -15,6 +17,7 @@ export declare class Renderer {
     private endBuffer;
     private startTimeBuffer;
     private lifetimeBuffer;
+    private sizeBuffer;
     constructor(context: Context);
     render(renderCall: RenderCall, time: number): void;
 }
