@@ -7,7 +7,10 @@ export declare class ParticleSystem {
     private context;
     private time;
     private delta;
-    constructor(options: IpsOptions, canvas: HTMLCanvasElement);
+    private width;
+    private height;
+    constructor(options: IpsOptions, canvas: HTMLCanvasElement, width: number, height: number);
+    setSize(width: number, height: number): void;
     addEmitter(options: IpsEmitterOptions): void;
     update(): void;
     render(): void;

@@ -1,5 +1,5 @@
 import { ImageItem } from "./imageItem";
 export declare class IpsOptions {
-    color: "";
+    color: string;
     textures: ImageItem[];
 }

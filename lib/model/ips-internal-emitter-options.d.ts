@@ -1,15 +1,13 @@
 import { MinMax } from "./min-max";
-import { RenderMode } from "./render-mode";
 import { IpsCoordinates } from "./ips-coordinates";
-export declare class IpsEmitterOptions {
+import { RenderMode } from "./render-mode";
+export interface IpsInternalEmitterOptions {
     start: IpsCoordinates;
     velocity: IpsCoordinates;
-    particlesSec: number;
     lifeTime: MinMax<number>;
     size: MinMax<number>;
     growth: number;
-    color: string;
-    alpha: number;
+    particlesSec: number;
     renderMode: RenderMode;
-    constructor(start: IpsCoordinates, velocity: IpsCoordinates, particlesSec: number);
+    color: [number, number, number, number];
 }

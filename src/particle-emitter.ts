@@ -4,6 +4,8 @@ import { Renderer } from "./renderer";
 import { RenderCall } from "./model/render-call";
 import { IpsEmitterOptions } from "./model/ips-emitter-options";
 import { RenderMode } from "./model/render-mode";
+import { Util } from "./util/util";
+import { IpsInternalEmitterOptions } from "./model/ips-internal-emitter-options";
 
 export class ParticleEmitter {
 
@@ -20,17 +22,19 @@ export class ParticleEmitter {
     private renderer: Renderer;
     private renderCall: RenderCall;
     private updateParticles: (startTime: number) => void;
+    private internalOptions: IpsInternalEmitterOptions;
 
-    constructor(private context: Context, private options: IpsEmitterOptions) {
+    constructor(private context: Context, private options: IpsEmitterOptions, width: number, height: number) {
+        this.internalOptions = Util.toInternalOptions(options, width, height);
         this.renderer = new Renderer(this.context);
 
-        if(options.renderMode == RenderMode.Static) {
+        if(this.internalOptions.renderMode == RenderMode.Static) {
             this.updateParticles = this.setTimeValue;
         } else {
             this.updateParticles = this.setParticleValues;
         }
 
-        this.initPool(options);
+        this.initPool(this.internalOptions);
 
         this.renderCall = {
             startPosition: this.startPosition,
@@ -38,24 +42,23 @@ export class ParticleEmitter {
             startTime: this.startTime,
             lifeTime: this.lifeTime,
             size: this.size,
-            color: options.color,
+            color: this.internalOptions.color,
             length: this.length,
             growth: this.growth
         }
     }
 
     public update(delta: number) {
-        let nrOfParticles = Math.floor((this.options.particlesSec / 1000) * delta);
+        let nrOfParticles = Math.floor((this.internalOptions.particlesSec / 1000) * delta);
         this.generateParticles(nrOfParticles);
         this.renderCall.startTime = this.startTime;
     }
 
     public render(time: number) {
-        this.context.clear([0, 0, 0, 0]);
         this.renderer.render(this.renderCall, time);
     }
 
-    private initPool(options: IpsEmitterOptions) {
+    private initPool(options: IpsInternalEmitterOptions) {
         let avgLifeSpan = (options.lifeTime.min + options.lifeTime.max) / 2;
         this.length = (options.particlesSec / (avgLifeSpan / 1000)) * 1.2;
 
@@ -80,17 +83,17 @@ export class ParticleEmitter {
 
     private setParticleValues(startTime) {
         let index3 = this.index * 3;
-        this.startPosition[index3] = this.rand(this.options.start.x.min, this.options.start.x.max);
-        this.startPosition[index3 + 1] = this.rand(this.options.start.y.min, this.options.start.y.max);
+        this.startPosition[index3] = this.rand(this.internalOptions.start.x.min, this.internalOptions.start.x.max);
+        this.startPosition[index3 + 1] = this.rand(this.internalOptions.start.y.min, this.internalOptions.start.y.max);
         this.startPosition[index3 + 2] = 0;
 
-        this.velocity[index3] = this.rand(this.options.velocity.x.min, this.options.velocity.x.max);
-        this.velocity[index3 + 1] = this.rand(this.options.velocity.y.min, this.options.velocity.y.max);
+        this.velocity[index3] = this.rand(this.internalOptions.velocity.x.min, this.internalOptions.velocity.x.max);
+        this.velocity[index3 + 1] = this.rand(this.internalOptions.velocity.y.min, this.internalOptions.velocity.y.max);
         this.velocity[index3 + 2] = 0;
 
-        this.size[this.index] = this.rand(this.options.size.min, this.options.size.max);
+        this.size[this.index] = this.rand(this.internalOptions.size.min, this.internalOptions.size.max);
         this.startTime[this.index] = startTime;
-        this.lifeTime[this.index] = this.rand(this.options.lifeTime.min, this.options.lifeTime.max);
+        this.lifeTime[this.index] = this.rand(this.internalOptions.lifeTime.min, this.internalOptions.lifeTime.max);
 
         if (this.index > this.length) {
             this.index = 0;

@@ -15,7 +15,8 @@ export declare class ParticleEmitter {
     private renderer;
     private renderCall;
     private updateParticles;
-    constructor(context: Context, options: IpsEmitterOptions);
+    private internalOptions;
+    constructor(context: Context, options: IpsEmitterOptions, width: number, height: number);
     update(delta: number): void;
     render(time: number): void;
     private initPool(options);
