@@ -10,6 +10,7 @@ export class IpsEmitterOptions {
     public color: string = "ffffff";
     public alpha: number = 1;
     public renderMode: RenderMode = RenderMode.Dynamic;
+    public textureKey: string;
 
     constructor(
         public start: IpsCoordinates,

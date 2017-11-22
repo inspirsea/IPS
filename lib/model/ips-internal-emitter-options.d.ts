@@ -10,4 +10,5 @@ export interface IpsInternalEmitterOptions {
     particlesSec: number;
     renderMode: RenderMode;
     color: [number, number, number, number];
+    textureKey: string;
 }

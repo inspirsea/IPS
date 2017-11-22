@@ -1,4 +1,4 @@
 export class ImageItem {
-    image: HTMLImageElement;
+    image: HTMLImageElement | string;
     key: string;
 }

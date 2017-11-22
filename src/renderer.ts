@@ -92,7 +92,12 @@ export class Renderer {
         this.gl.vertexAttribPointer(this.a_size_location, 1, this.gl.FLOAT, false, 0, 0);
 
         this.gl.activeTexture(this.gl.TEXTURE0);
-        this.gl.bindTexture(this.gl.TEXTURE_2D, this.context.textures["default"]);
+        if(renderCall.textureKey != null) {
+            this.gl.bindTexture(this.gl.TEXTURE_2D, this.context.textures[renderCall.textureKey]);
+        } else {
+            this.gl.bindTexture(this.gl.TEXTURE_2D, this.context.textures["default"]);
+        }
+        
 
         this.gl.uniform1f(this.u_growth, renderCall.growth);
         this.gl.uniform4f(this.u_color, renderCall.color[0], renderCall.color[1], renderCall.color[2], renderCall.color[3]);

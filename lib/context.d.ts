@@ -12,7 +12,8 @@ export declare class Context {
     clear(color: number[]): void;
     private initContext(canvas);
     private initShaders(options);
-    private initTextures(gl, options);
+    private loadImages(imageItems);
+    private initTextures(gl, imageItems);
     private isPowerOf2(value);
     private compileShader(source, shaderType);
     private getDefaultImage();

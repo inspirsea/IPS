@@ -10,15 +10,24 @@ export class ParticleSystem {
     private particleEmitters: ParticleEmitter[] = [];
     private context: Context;
     private time: number = +Date.now().toString().slice(5);
-    private delta: number;
     private width: number;
     private height: number;
+    private fps = 60;
+    private intervalTimer: number;
 
     constructor(options: IpsOptions, canvas: HTMLCanvasElement, width: number, height: number) {
         this.context = new Context(options, canvas);
         this.onLoad = this.context.onLoad();
         this.width = width;
         this.height = height;
+    }
+
+    public start() {
+        this.intervalTimer = setInterval(this.run(), 0);
+    }
+
+    public stop() {
+        clearInterval(this.intervalTimer);
     }
 
     public setSize(width: number, height: number) {
@@ -32,11 +41,11 @@ export class ParticleSystem {
 
     public update() {
         let newTime = +Date.now().toString().slice(5);
-        this.delta = newTime - this.time;
+        let delta = newTime - this.time;
         this.time = newTime;
 
         for (let particleEmitter of this.particleEmitters) {
-            particleEmitter.update(this.delta);
+            particleEmitter.update(delta);
         }
     }
 
@@ -44,6 +53,24 @@ export class ParticleSystem {
         this.context.clear([0, 0, 0, 0]);
         for (let particleEmitter of this.particleEmitters) {
             particleEmitter.render(this.time);
+        }
+    }
+
+    private run() {
+        let loops = 0, skipTicks = 1000 / this.fps,
+            maxFrameSkip = 3,
+            nextGameTick = (new Date).getTime();
+
+        return () => {
+            loops = 0;
+
+            while ((new Date).getTime() > nextGameTick && loops < maxFrameSkip) {
+
+                this.update();
+                this.render();
+
+                nextGameTick += skipTicks;
+            };
         }
     }
 

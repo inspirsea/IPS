@@ -8,4 +8,5 @@ export class RenderCall {
     public growth: number;
     public color: [number, number, number, number];
     public length: number;
+    public textureKey: string;
 }

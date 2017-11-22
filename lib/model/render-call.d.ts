@@ -7,4 +7,5 @@ export declare class RenderCall {
     growth: number;
     color: [number, number, number, number];
     length: number;
+    textureKey: string;
 }

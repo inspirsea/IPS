@@ -35,7 +35,8 @@ export class Util {
             growth: options.growth/1000,
             color: [ glColor[0], glColor[1], glColor[2], options.alpha ],
             particlesSec: options.particlesSec,
-            renderMode: options.renderMode
+            renderMode: options.renderMode,
+            textureKey: options.textureKey
         };
 
         return internalOptions;

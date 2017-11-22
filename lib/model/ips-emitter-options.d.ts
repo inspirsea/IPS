@@ -11,5 +11,6 @@ export declare class IpsEmitterOptions {
     color: string;
     alpha: number;
     renderMode: RenderMode;
+    textureKey: string;
     constructor(start: IpsCoordinates, velocity: IpsCoordinates, particlesSec: number);
 }

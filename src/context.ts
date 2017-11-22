@@ -1,5 +1,6 @@
 import { Observable, Subscription, Observer, Subject } from 'rxjs';
 import { IpsOptions } from './model/ips-options';
+import { ImageItem } from './model/imageItem';
 
 export class Context {
     public shaderProgram: WebGLProgram;
@@ -52,23 +53,56 @@ export class Context {
             options.textures.push({
                 key: "default",
                 image: it
-            })
-            this.initTextures(this.gl, options);
-            this.loaded.next();
+            });
+            this.loadImages(options.textures).subscribe((imageItems) => {
+                this.initTextures(this.gl, imageItems);
+                this.loaded.next();
+            });
         });
     }
 
-    private initTextures(gl: WebGLRenderingContext, options: IpsOptions) {
+    private loadImages(imageItems: ImageItem[]) {
 
-        for (let imageItem of options.textures) {
+        let imgLoaders: Observable<ImageItem>[] = [];
+
+        for (let item of imageItems) {
+            let loader = Observable.create((obs: Observer<ImageItem>) => {
+
+                if (typeof item.image == "string") {
+                    let img: HTMLImageElement = document.createElement("img");
+                    img.crossOrigin = "Anonymous";
+                    img.src = item.image;
+
+                    img.onload = () => {
+                        item.image = img;
+                        obs.next(item);
+                        obs.complete();
+                    };
+                } else {
+                    obs.next(item);
+                    obs.complete();
+                }
+            });
+
+            imgLoaders.push(loader);
+        }
+
+        return Observable.forkJoin(imgLoaders);
+    }
+
+    private initTextures(gl: WebGLRenderingContext, imageItems: ImageItem[]) {
+
+        for (let imageItem of imageItems) {
+
+            let image = imageItem.image as HTMLImageElement;
 
             this.textures[imageItem.key] = gl.createTexture();
             gl.bindTexture(gl.TEXTURE_2D, this.textures[imageItem.key]);
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
 
-            if (this.isPowerOf2(imageItem.image.width) && this.isPowerOf2(imageItem.image.height)) {
+            if (this.isPowerOf2(image.width) && this.isPowerOf2(image.height)) {
                 // Yes, it's a power of 2. Generate mips.
-                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, imageItem.image);
-                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
                 gl.generateMipmap(gl.TEXTURE_2D);
             } else {
                 // No, it's not a power of 2. Turn of mips and set

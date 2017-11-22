@@ -16,6 +16,7 @@ export declare class ParticleEmitter {
     private renderCall;
     private updateParticles;
     private internalOptions;
+    private deltaLeft;
     constructor(context: Context, options: IpsEmitterOptions, width: number, height: number);
     update(delta: number): void;
     render(time: number): void;

@@ -23,6 +23,7 @@ export class ParticleEmitter {
     private renderCall: RenderCall;
     private updateParticles: (startTime: number) => void;
     private internalOptions: IpsInternalEmitterOptions;
+    private deltaLeft: number;
 
     constructor(private context: Context, private options: IpsEmitterOptions, width: number, height: number) {
         this.internalOptions = Util.toInternalOptions(options, width, height);
@@ -44,12 +45,19 @@ export class ParticleEmitter {
             size: this.size,
             color: this.internalOptions.color,
             length: this.length,
-            growth: this.growth
+            growth: this.growth,
+            textureKey: this.internalOptions.textureKey
         }
     }
 
     public update(delta: number) {
-        let nrOfParticles = Math.floor((this.internalOptions.particlesSec / 1000) * delta);
+        let curentDelta = delta + this.deltaLeft;
+        let nrOfParticles = Math.floor((this.internalOptions.particlesSec / 1000) * curentDelta);
+        if(nrOfParticles == 0) {
+            this.deltaLeft += delta;
+        } else {
+            this.deltaLeft = 0;
+        }
         this.generateParticles(nrOfParticles);
         this.renderCall.startTime = this.startTime;
     }
