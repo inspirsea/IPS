@@ -9,4 +9,6 @@ export class RenderCall {
     public color: [number, number, number, number];
     public length: number;
     public textureKey: string;
+    public blendmodeSource: number;
+    public blendmodeTarget: number;
 }

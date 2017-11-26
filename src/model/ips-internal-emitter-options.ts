@@ -5,11 +5,13 @@ import { RenderMode } from "./render-mode";
 export interface IpsInternalEmitterOptions {
     start: IpsCoordinates;
     velocity: IpsCoordinates;
-    lifeTime: MinMax<number>;
+    lifeTime: number;
     size: MinMax<number>;
     growth: number;
     particlesSec: number;
     renderMode: RenderMode;
     color: [number, number, number, number];
     textureKey: string;
+    blendmodeSource: number;
+    blendmodeTarget: number;
 }

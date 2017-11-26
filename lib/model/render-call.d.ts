@@ -8,4 +8,6 @@ export declare class RenderCall {
     color: [number, number, number, number];
     length: number;
     textureKey: string;
+    blendmodeSource: number;
+    blendmodeTarget: number;
 }

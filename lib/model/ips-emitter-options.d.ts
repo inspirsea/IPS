@@ -1,16 +1,20 @@
 import { MinMax } from "./min-max";
 import { RenderMode } from "./render-mode";
 import { IpsCoordinates } from "./ips-coordinates";
+import { IpsPositionType } from "./ips-position-type";
 export declare class IpsEmitterOptions {
-    start: IpsCoordinates;
+    startPosition: IpsCoordinates;
     velocity: IpsCoordinates;
     particlesSec: number;
-    lifeTime: MinMax<number>;
+    lifeTime: number;
     size: MinMax<number>;
     growth: number;
     color: string;
     alpha: number;
     renderMode: RenderMode;
+    blendmodeSource: number;
+    blendmodeTarget: number;
+    positionType: IpsPositionType;
     textureKey: string;
-    constructor(start: IpsCoordinates, velocity: IpsCoordinates, particlesSec: number);
+    constructor(startPosition: IpsCoordinates, velocity: IpsCoordinates, particlesSec: number, lifeTime?: number, size?: MinMax<number>, growth?: number, color?: string, alpha?: number, renderMode?: RenderMode, blendmodeSource?: number, blendmodeTarget?: number, positionType?: IpsPositionType, textureKey?: string);
 }

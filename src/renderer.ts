@@ -54,6 +54,8 @@ export class Renderer {
     public render(renderCall: RenderCall, time: number) {
         this.context.gl.useProgram(this.glProgram);
 
+        this.gl.blendFunc(renderCall.blendmodeSource, renderCall.blendmodeTarget);
+
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.startBuffer);
         this.gl.bufferData(this.gl.ARRAY_BUFFER, renderCall.startPosition, this.gl.STATIC_DRAW);
 

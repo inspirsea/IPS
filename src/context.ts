@@ -19,6 +19,8 @@ export class Context {
         this.loaded = new Subject();
 
         this.initShaders(options);
+
+        this.gl.viewport(0, 0, canvas.width, canvas.height);
     }
 
     public onLoad(): Subject<string> {
@@ -113,8 +115,8 @@ export class Context {
             }
         }
 
-        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
         gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
     }
 
     private isPowerOf2(value) {
