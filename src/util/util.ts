@@ -6,6 +6,10 @@ export class Util {
 
     public static colorHexToGl(hexcolor: string): [number, number, number] {
 
+        if(hexcolor[0] == "#") {
+            hexcolor = hexcolor.substr(1);
+        }
+
         let r = parseInt(hexcolor.slice(0, 2), 16);
         let g = parseInt(hexcolor.slice(2, 4), 16);
         let b = parseInt(hexcolor.slice(4, 6), 16);

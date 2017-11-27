@@ -30,7 +30,7 @@ export class ParticleEmitter {
     private renderMode: RenderMode;
     private positionType: IpsPositionType;
     private lifeTimeOption: number;
-    private color: [number, number, number, number];
+    private color: [number, number, number, number] = [0, 0, 0, 1];
     private alpha: number;
 
     public set startOption(value: IpsCoordinates) {
@@ -63,11 +63,11 @@ export class ParticleEmitter {
     
     private _velocityOption: IpsCoordinates = new IpsCoordinates(0, 0, 0, 0);
 
-    public set growthOption(value: number) {
+    private set growthOption(value: number) {
         this._growthOption = value/1000;
     }
 
-    public get growthOption() {
+    private get growthOption() {
         return this._growthOption;
     }
 
@@ -128,7 +128,14 @@ export class ParticleEmitter {
 
     public setColor(colorHex: string) {
         let color = Util.colorHexToGl(colorHex);
-        this.color = [color[0], color[1], color[2], this.alpha];
+        this.color[0] = color[0];
+        this.color[1] = color[1];
+        this.color[2] = color[2];
+    }
+
+    public setGrowth(value: number) {
+        this.growthOption = value;
+        this.renderCall.growth = this.growthOption;
     }
 
     public update(delta: number) {

@@ -29,7 +29,7 @@ export declare class ParticleEmitter {
     private _startOption;
     velocityOption: IpsCoordinates;
     private _velocityOption;
-    growthOption: number;
+    private growthOption;
     private _growthOption;
     sizeOption: MinMax<number>;
     textureKey: string;
@@ -38,6 +38,7 @@ export declare class ParticleEmitter {
     constructor(context: Context, options: IpsEmitterOptions, width: number, height: number);
     private setOptions(options);
     setColor(colorHex: string): void;
+    setGrowth(value: number): void;
     update(delta: number): void;
     render(time: number): void;
     private initPool(particlesSec, lifetime, growth);
