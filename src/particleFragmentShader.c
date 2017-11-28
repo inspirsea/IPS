@@ -1,7 +1,6 @@
-  precision mediump float;
+precision mediump float;
 
   uniform vec4 u_color;
-  varying float v_lifetime;
 
   uniform sampler2D u_particleTexture;
 

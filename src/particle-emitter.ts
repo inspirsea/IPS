@@ -33,7 +33,7 @@ export class ParticleEmitter {
     private color: [number, number, number, number] = [0, 0, 0, 1];
     private alpha: number;
 
-    public set startOption(value: IpsCoordinates) {
+    private set startOption(value: IpsCoordinates) {
         if(this.positionType == IpsPositionType.Pixel) {
             this._startOption.x.min = Util.pixelToRelative(value.x.min, this.width);
             this._startOption.x.max = Util.pixelToRelative(value.x.max, this.width);
@@ -44,20 +44,20 @@ export class ParticleEmitter {
         }
     }
 
-    public get startOption() {
+    private get startOption() {
         return this._startOption;
     }
 
     private _startOption: IpsCoordinates = new IpsCoordinates(0, 0, 0, 0);
 
-    public set velocityOption(value: IpsCoordinates) {
+    private set velocityOption(value: IpsCoordinates) {
         this._velocityOption.x.min = value.x.min/1000;
         this._velocityOption.x.max = value.x.max/1000;
         this._velocityOption.y.min = value.y.min/1000;
         this._velocityOption.y.max = value.y.max/1000;
     }
 
-    public get velocityOption() {
+    private get velocityOption() {
         return this._velocityOption;
     }
     
@@ -73,11 +73,10 @@ export class ParticleEmitter {
 
     private _growthOption: number;
 
-    
-    public sizeOption: MinMax<number>;
-    public textureKey: string;
-    public blendmodeSource: number;
-    public blendmodeTarget: number;
+    private sizeOption: MinMax<number>;
+    private textureKey: string;
+    private blendmodeSource: number;
+    private blendmodeTarget: number;
     //End options
 
     constructor(private context: Context, private options: IpsEmitterOptions, private width: number, private height: number) {
@@ -124,6 +123,30 @@ export class ParticleEmitter {
         } else {
             this.updateParticles = this.setParticleValues;
         }
+    }
+
+    public setStartOption(value: IpsCoordinates) {
+        this.startOption = value;
+    } 
+
+    public setBlendmodeSource(value: number) {
+        this.blendmodeSource = value;
+    }
+
+    public setBlendmodeTarget(value: number) {
+        this.blendmodeTarget = value;
+    }
+
+    public setTextureKey(value: string) {
+        this.textureKey = value;
+    }
+
+    public setSizeOption(value: MinMax<number>) {
+        this.sizeOption = value;
+    }
+
+    public setVelocityOption(value: IpsCoordinates) {
+        this.velocityOption = value;
     }
 
     public setColor(colorHex: string) {
