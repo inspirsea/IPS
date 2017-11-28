@@ -1,14 +1,12 @@
-import { Particle } from "./particle";
 import { Context } from "./context";
 import { Renderer } from "./renderer";
 import { RenderCall } from "./model/render-call";
 import { IpsEmitterOptions } from "./model/ips-emitter-options";
 import { RenderMode } from "./model/render-mode";
 import { Util } from "./util/util";
-import { IpsInternalEmitterOptions } from "./model/ips-internal-emitter-options";
 import { IpsCoordinates } from "./model/ips-coordinates";
 import { MinMax } from "./model/min-max";
-import { IpsPositionType } from "./model/ips-position-type";
+import { IpsPositiontype } from "./model/ips-positiontype";
 
 export class ParticleEmitter {
 
@@ -28,13 +26,13 @@ export class ParticleEmitter {
     //Options
     private particlesSec: number;
     private renderMode: RenderMode;
-    private positionType: IpsPositionType;
+    private positionType: IpsPositiontype;
     private lifeTimeOption: number;
     private color: [number, number, number, number] = [0, 0, 0, 1];
     private alpha: number;
 
     private set startOption(value: IpsCoordinates) {
-        if(this.positionType == IpsPositionType.Pixel) {
+        if(this.positionType == IpsPositiontype.Pixel) {
             this._startOption.x.min = Util.pixelToRelative(value.x.min, this.width);
             this._startOption.x.max = Util.pixelToRelative(value.x.max, this.width);
             this._startOption.y.min = Util.pixelToRelative(value.x.min, this.height);

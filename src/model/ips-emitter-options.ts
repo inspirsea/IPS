@@ -1,7 +1,7 @@
 import { MinMax } from "./min-max";
 import { RenderMode } from "./render-mode";
 import { IpsCoordinates } from "./ips-coordinates";
-import { IpsPositionType } from "./ips-position-type";
+import { IpsPositiontype } from "./ips-positiontype";
 
 export class IpsEmitterOptions {
 
@@ -17,7 +17,7 @@ export class IpsEmitterOptions {
         public renderMode: RenderMode = RenderMode.Dynamic,
         public blendmodeSource = WebGLRenderingContext.SRC_ALPHA,
         public blendmodeTarget = WebGLRenderingContext.ONE,
-        public positionType = IpsPositionType.Pixel,
+        public positionType = IpsPositiontype.Pixel,
         public textureKey?: string,
     ) {
     }

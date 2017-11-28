@@ -1,7 +1,3 @@
-import { IpsEmitterOptions } from "../model/ips-emitter-options";
-import { IpsInternalEmitterOptions } from "../model/ips-internal-emitter-options";
-import { IpsPositionType } from "../model/ips-position-type";
-
 export class Util {
 
     public static colorHexToGl(hexcolor: string): [number, number, number] {

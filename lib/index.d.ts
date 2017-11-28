@@ -1,1 +1,9 @@
 export { ParticleSystem } from './particle-system';
+export { ParticleEmitter } from './particle-emitter';
+export { RenderMode } from './model/render-mode';
+export { MinMax } from './model/min-max';
+export { IpsPositiontype } from './model/ips-positiontype';
+export { IpsOptions } from './model/ips-options';
+export { IpsEmitterOptions } from './model/ips-emitter-options';
+export { IpsCoordinates } from './model/ips-coordinates';
+export { ImageItem } from './model/image-item';

@@ -1,4 +1,4 @@
-import { ImageItem } from "./imageItem";
+import { ImageItem } from "./image-item";
 
 export class IpsOptions {
     color: string = "000000";

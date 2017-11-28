@@ -1,6 +1,6 @@
 import { Observable, Subscription, Observer, Subject } from 'rxjs';
 import { IpsOptions } from './model/ips-options';
-import { ImageItem } from './model/imageItem';
+import { ImageItem } from './model/image-item';
 
 export class Context {
     public shaderProgram: WebGLProgram;
