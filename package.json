@@ -1,7 +1,7 @@
 {
     "name": "ips",
     "version": "1.0.0",
-    "description": "A particle system written in webgl",
+    "description": "Optimized particle system written in Typescript using WebGL.",
     "author": "Emil Sunesson",
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
