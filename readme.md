@@ -1,4 +1,5 @@
 # IPS
 
 ### Description
-IPS is a library to quickly and efficiently create particle effects to be rendered on canvas.
+IPS is a library to quickly and efficiently create particle effects.
+It is written in Typescript and uses WebGL for its rendering.
