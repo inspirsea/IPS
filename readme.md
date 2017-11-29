@@ -1,7 +1,7 @@
-# IPS
+# Particle-Ins
 
 ### Description
-IPS is a library to quickly and efficiently create particle effects.
+Particle-Ins is a library to quickly and efficiently create particle effects.
 
 It is written in Typescript and uses WebGL for its rendering.
 

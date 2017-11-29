@@ -1,5 +1,5 @@
 {
-    "name": "ips",
+    "name": "particle-ins",
     "version": "1.0.0",
     "description": "Optimized particle system written in Typescript using WebGL",
     "author": "Emil Sunesson",
