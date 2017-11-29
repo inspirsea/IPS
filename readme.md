@@ -1,12 +1,15 @@
-# Particle-Ins
+# Particle-ins
 
 ### Description
-Particle-Ins is a library to quickly and efficiently create particle effects.
+Particle-ins is a library to quickly and efficiently create particle effects.
 
-It is written in Typescript and uses WebGL for its rendering.
+Written in Typescript, uses WebGL for rendering.
 
 ### Installation
 
 ```sh
 $> npm install ips
 ```
+
+### Usage
+
