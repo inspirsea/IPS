@@ -35,8 +35,8 @@ export class ParticleEmitter {
         if(this.positionType == IpsPositiontype.Pixel) {
             this._startOption.x.min = Util.pixelToRelative(value.x.min, this.width);
             this._startOption.x.max = Util.pixelToRelative(value.x.max, this.width);
-            this._startOption.y.min = Util.pixelToRelative(value.x.min, this.height);
-            this._startOption.y.max = Util.pixelToRelative(value.x.max, this.height);
+            this._startOption.y.min = Util.pixelToRelative(value.y.min, this.height);
+            this._startOption.y.max = Util.pixelToRelative(value.y.max, this.height);
         } else {
             this._startOption = value;
         }
