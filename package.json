@@ -1,12 +1,13 @@
 {
     "name": "particle-ins",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Optimized particle system written in Typescript using WebGL",
-    "author": "Emil Sunesson",
     "repository": {
         "type": "git",
         "url": "https://github.com/inspirsea/Particle-ins.git"
     },
+    "keywords": ["typescript", "javascript", "webgl", "particle", "particle-system", "library", "2d"],
+    "author": "Emil Sunesson",
     "license": "MIT",
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",

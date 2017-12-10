@@ -32,7 +32,7 @@ export class ParticleEmitter {
     private alpha: number;
 
     private set startOption(value: IpsCoordinates) {
-        if(this.positionType == IpsPositiontype.Pixel) {
+        if (this.positionType == IpsPositiontype.Pixel) {
             this._startOption.x.min = Util.pixelToRelative(value.x.min, this.width);
             this._startOption.x.max = Util.pixelToRelative(value.x.max, this.width);
             this._startOption.y.min = Util.pixelToRelative(value.y.min, this.height);
@@ -49,20 +49,20 @@ export class ParticleEmitter {
     private _startOption: IpsCoordinates = new IpsCoordinates(0, 0, 0, 0);
 
     private set velocityOption(value: IpsCoordinates) {
-        this._velocityOption.x.min = value.x.min/1000;
-        this._velocityOption.x.max = value.x.max/1000;
-        this._velocityOption.y.min = value.y.min/1000;
-        this._velocityOption.y.max = value.y.max/1000;
+        this._velocityOption.x.min = value.x.min / 1000;
+        this._velocityOption.x.max = value.x.max / 1000;
+        this._velocityOption.y.min = value.y.min / 1000;
+        this._velocityOption.y.max = value.y.max / 1000;
     }
 
     private get velocityOption() {
         return this._velocityOption;
     }
-    
+
     private _velocityOption: IpsCoordinates = new IpsCoordinates(0, 0, 0, 0);
 
     private set growthOption(value: number) {
-        this._growthOption = value/1000;
+        this._growthOption = value / 1000;
     }
 
     private get growthOption() {
@@ -125,7 +125,7 @@ export class ParticleEmitter {
 
     public setStartOption(value: IpsCoordinates) {
         this.startOption = value;
-    } 
+    }
 
     public setBlendmodeSource(value: number) {
         this.blendmodeSource = value;
@@ -160,6 +160,9 @@ export class ParticleEmitter {
     }
 
     public update(delta: number) {
+        if (delta > this.lifeTimeOption) {
+            delta = 0;
+        }
         let curentDelta = delta + this.deltaLeft;
         let nrOfParticles = Math.floor((this.particlesSec / 1000) * curentDelta);
         if (nrOfParticles == 0) {
