@@ -8,8 +8,24 @@ Written in Typescript, uses WebGL for rendering.
 ### Installation
 
 ```sh
-$> npm install ips
+$> npm install particle-ins
 ```
 
 ### Usage
 
+Import the library.
+
+```sh
+import * as particle-ins from "particle-ins";
+```
+
+Or if you prefer
+
+```sh
+import { ParticleSystem, ...etc } from "particle-ins";
+```
+
+### Demo
+
+Live demo!
+[http://emilsunesson.com/code](http://emilsunesson.com/code)
