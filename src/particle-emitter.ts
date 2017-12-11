@@ -162,6 +162,7 @@ export class ParticleEmitter {
     public update(delta: number) {
         if (delta > this.lifeTimeOption) {
             delta = 0;
+            this.deltaLeft = 0;
         }
         let curentDelta = delta + this.deltaLeft;
         let nrOfParticles = Math.floor((this.particlesSec / 1000) * curentDelta);
