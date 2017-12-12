@@ -12,8 +12,10 @@ export class Context {
     constructor(options: IpsOptions, canvas?: HTMLCanvasElement, gl?: WebGLRenderingContext) {
         if (canvas) {
             this.initContext(canvas);
-        } else {
+        } else if(gl) {
             this.gl = gl;
+        } else {
+            throw Error("No canvas or WebglRenderingContext detected! Make sure the canvas is loaded before calling the constructor!");
         }
 
         this.loaded = new Subject();
