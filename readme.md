@@ -68,7 +68,7 @@ new ParticleSystem(options, canvas, 1000, 600);
 
 **alpha**: Alpha 0-1
 
-**renderMode**: Static or dynamic rendering if static generate particles once otherwise generate continusly
+**renderMode**: Static or dynamic rendering if static generate particles once otherwise generate continuously
 
 **blendmodeSource**: Webgl blendmode source
 
@@ -76,7 +76,7 @@ new ParticleSystem(options, canvas, 1000, 600);
 
 **positionType**: Pixel or relative position type
 
-**textureKey**: If using custom texture else default
+**textureKey**: Custom texture key
 
 #### Example
 

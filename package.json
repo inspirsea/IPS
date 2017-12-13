@@ -1,6 +1,6 @@
 {
     "name": "particle-ins",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Optimized particle system written in Typescript using WebGL",
     "repository": {
         "type": "git",
