@@ -29,11 +29,11 @@ import { ParticleSystem, ...etc } from "particle-ins";
 
 #### IpsOptions 
 
-color: Color in hex
+**color**: Color in hex
 
-alpha: Alpha 0-1
+**alpha**: Alpha 0-1
 
-textures: Custom textures
+**textures**: Custom textures
 
 #### IpsEmitterOptions
 
