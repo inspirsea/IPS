@@ -25,6 +25,11 @@ Or if you prefer
 import { ParticleSystem, ...etc } from "particle-ins";
 ```
 
+## Demo
+
+Live demo!
+[http://emilsunesson.com/code](http://emilsunesson.com/code)
+
 ## Api
 
 ### IpsOptions 
@@ -95,7 +100,3 @@ emitterOptions.positionType = IpsPositiontype.Relative;
 particleSystem.addEmitter(emitterOptions);
 ```
 
-## Demo
-
-Live demo!
-[http://emilsunesson.com/code](http://emilsunesson.com/code)
