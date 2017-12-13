@@ -78,6 +78,23 @@ new ParticleSystem(options, canvas, 1000, 600);
 
 **textureKey**: If using custom texture else default
 
+#### Example
+
+```sh
+let emitterOptions = new IpsEmitterOptions(
+    new IpsCoordinates(-1, 1, 1, 1),
+    new IpsCoordinates(-0.5, 0.5, -0.8, -0.8),
+    1000,
+    2500
+);
+
+emitterOptions.size = { min: 3, max: 8 }
+emitterOptions.textureKey = "snow";
+emitterOptions.positionType = IpsPositiontype.Relative;
+
+particleSystem.addEmitter(emitterOptions);
+```
+
 ## Demo
 
 Live demo!
