@@ -37,31 +37,31 @@ textures: Custom textures
 
 #### IpsEmitterOptions
 
-startPosition: Min/max position of x and y
+**startPosition**: Min/max position of x and y
 
-velocity: Min/max velocity of x and y
+**velocity**: Min/max velocity of x and y
 
-particlesSec: Number of particles emitted per second
+**particlesSec**: Number of particles emitted per second
 
-lifeTime: lifetime of particles in milliseconds
+**lifeTime**: lifetime of particles in milliseconds
 
-size: Min/max size
+**size**: Min/max size
 
-growth: Growth plus value grows minus value shrinks
+**growth**: Growth plus value grows minus value shrinks
 
-color: Color in hex
+**color**: Color in hex
 
-alpha: Alpha 0-1
+**alpha**: Alpha 0-1
 
-renderMode: Static or dynamic rendering if static generate particles once otherwise generate continusly
+**renderMode**: Static or dynamic rendering if static generate particles once otherwise generate continusly
 
-blendmodeSource: Webgl blendmode source
+**blendmodeSource**: Webgl blendmode source
 
-blendmodeTarget: Webgl blendmode target
+**blendmodeTarget**: Webgl blendmode target
 
-positionType: Pixel or relative position type
+**positionType**: Pixel or relative position type
 
-textureKey: If using custom texture else default
+**textureKey**: If using custom texture else default
 
 ### Demo
 
