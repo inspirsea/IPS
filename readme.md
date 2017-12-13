@@ -1,17 +1,17 @@
 # Particle-ins
 
-### Description
+## Description
 Particle-ins is a library to quickly and efficiently create particle effects.
 
 Written in Typescript, uses WebGL for rendering.
 
-### Installation
+## Installation
 
 ```sh
 $> npm install particle-ins
 ```
 
-### Usage
+## Usage
 
 Import the library.
 
@@ -25,9 +25,9 @@ Or if you prefer
 import { ParticleSystem, ...etc } from "particle-ins";
 ```
 
-### Api
+## Api
 
-#### IpsOptions 
+### IpsOptions 
 
 **color**: Color in hex
 
@@ -35,7 +35,7 @@ import { ParticleSystem, ...etc } from "particle-ins";
 
 **textures**: Custom textures
 
-#### IpsEmitterOptions
+### IpsEmitterOptions
 
 **startPosition**: Min/max position of x and y
 
@@ -63,7 +63,7 @@ import { ParticleSystem, ...etc } from "particle-ins";
 
 **textureKey**: If using custom texture else default
 
-### Demo
+## Demo
 
 Live demo!
 [http://emilsunesson.com/code](http://emilsunesson.com/code)
