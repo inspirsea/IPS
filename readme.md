@@ -31,6 +31,7 @@ import { ParticleSystem, ...etc } from "particle-ins";
 
 color: Color in hex
 alpha: Alpha 0-1
+
 textures: Custom textures
 
 ### Demo
