@@ -35,6 +35,21 @@ import { ParticleSystem, ...etc } from "particle-ins";
 
 **textures**: Custom textures
 
+#### Example
+
+let customTexture: ImageItem = {
+    image: "../assets/images/snowflake.png",
+    key: "snow"
+};
+
+let options = new IpsOptions();
+
+options.textures = [snowTexture];
+
+options.color = "cccccc"
+    
+new ParticleSystem(options, canvas, 1000, 600);
+
 ### IpsEmitterOptions
 
 **startPosition**: Min/max position of x and y
