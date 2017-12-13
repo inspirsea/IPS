@@ -30,9 +30,38 @@ import { ParticleSystem, ...etc } from "particle-ins";
 #### IpsOptions 
 
 color: Color in hex
+
 alpha: Alpha 0-1
 
 textures: Custom textures
+
+#### IpsEmitterOptions
+
+startPosition: Min/max position of x and y
+
+velocity: Min/max velocity of x and y
+
+particlesSec: Number of particles emitted per second
+
+lifeTime: lifetime of particles in milliseconds
+
+size: Min/max size
+
+growth: Growth plus value grows minus value shrinks
+
+color: Color in hex
+
+alpha: Alpha 0-1
+
+renderMode: Static or dynamic rendering if static generate particles once otherwise generate continusly
+
+blendmodeSource: Webgl blendmode source
+
+blendmodeTarget: Webgl blendmode target
+
+positionType: Pixel or relative position type
+
+textureKey: If using custom texture else default
 
 ### Demo
 
