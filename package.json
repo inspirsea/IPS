@@ -6,7 +6,15 @@
         "type": "git",
         "url": "https://github.com/inspirsea/Particle-ins.git"
     },
-    "keywords": ["typescript", "javascript", "webgl", "particle", "particle-system", "library", "2d"],
+    "keywords": [
+        "typescript",
+        "javascript",
+        "webgl",
+        "particle",
+        "particle-system",
+        "library",
+        "2d"
+    ],
     "author": "Emil Sunesson",
     "license": "MIT",
     "main": "./lib/index.js",

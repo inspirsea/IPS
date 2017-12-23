@@ -18,7 +18,9 @@ export declare class ParticleSystem {
     setSize(width: number, height: number): void;
     addEmitter(options: IpsEmitterOptions): ParticleEmitter;
     removeEmitter(emitter: ParticleEmitter): void;
-    update(): void;
+    update(delta: number): void;
     render(): void;
     private run();
+    private setVisabilityManagement();
+    private getTime();
 }

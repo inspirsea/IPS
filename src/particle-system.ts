@@ -24,9 +24,12 @@ export class ParticleSystem {
         this.height = height;
         let color = Util.colorHexToGl(options.color);
         this.color = [color[0], color[1], color[2], options.alpha];
+
+        this.setVisabilityManagement();
     }
 
     public start() {
+        this.time = this.getTime();
         this.intervalTimer = setInterval(this.run(), 0);
     }
 
@@ -49,16 +52,12 @@ export class ParticleSystem {
     public removeEmitter(emitter: ParticleEmitter) {
         let index = this.particleEmitters.indexOf(emitter);
 
-        if(index != -1) {
+        if (index != -1) {
             this.particleEmitters.splice(index, 1);
         }
     }
 
-    public update() {
-        let newTime = +Date.now().toString().slice(5);
-        let delta = newTime - this.time;
-        this.time = newTime;
-
+    public update(delta: number) {
         for (let particleEmitter of this.particleEmitters) {
             particleEmitter.update(delta);
         }
@@ -74,15 +73,15 @@ export class ParticleSystem {
     private run() {
         let loops = 0, skipTicks = 1000 / this.fps,
             maxFrameSkip = 3,
-            nextGameTick = (new Date).getTime();
+            nextGameTick = this.getTime();
 
         return () => {
-            loops = 0;
-
-            while ((new Date).getTime() > nextGameTick && loops < maxFrameSkip) {
+            while (this.getTime() > nextGameTick && loops < maxFrameSkip) {
+                let delta = nextGameTick - this.time;
+				this.time = nextGameTick;
 
                 this.context.clear(this.color);
-                this.update();
+                this.update(delta);
                 this.render();
 
                 nextGameTick += skipTicks;
@@ -90,5 +89,32 @@ export class ParticleSystem {
         }
     }
 
+    private setVisabilityManagement() {
+        let visibilityChange = "";
+        let hidden = "";
+        let doc = document as any;
 
+        if (typeof doc.hidden !== "undefined") {
+            hidden = "hidden";
+            visibilityChange = "visibilitychange";
+        } else if (typeof doc.msHidden !== "undefined") {
+            hidden = "msHidden";
+            visibilityChange = "msvisibilitychange";
+        } else if (typeof doc.webkitHidden !== "undefined") {
+            hidden = "webkitHidden";
+            visibilityChange = "webkitvisibilitychange";
+        }
+
+        document.addEventListener(visibilityChange, () => {
+            if (document[hidden]) {
+                this.stop();
+            } else {
+                this.start();
+            }
+        }, false);
+    }
+
+    private getTime() {
+        return +Date.now().toString().slice(5);
+    }
 }
