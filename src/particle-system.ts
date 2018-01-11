@@ -24,8 +24,6 @@ export class ParticleSystem {
         this.height = height;
         let color = Util.colorHexToGl(options.color);
         this.color = [color[0], color[1], color[2], options.alpha];
-
-        this.setVisabilityManagement();
     }
 
     public start() {
@@ -70,6 +68,10 @@ export class ParticleSystem {
         }
     }
 
+    public destroy() {
+        this.stop();
+    }
+
     private run() {
         let loops = 0, skipTicks = 1000 / this.fps,
             maxFrameSkip = 3,
@@ -78,7 +80,7 @@ export class ParticleSystem {
         return () => {
             while (this.getTime() > nextGameTick && loops < maxFrameSkip) {
                 let delta = nextGameTick - this.time;
-				this.time = nextGameTick;
+                this.time = nextGameTick;
 
                 this.context.clear(this.color);
                 this.update(delta);
@@ -87,31 +89,6 @@ export class ParticleSystem {
                 nextGameTick += skipTicks;
             };
         }
-    }
-
-    private setVisabilityManagement() {
-        let visibilityChange = "";
-        let hidden = "";
-        let doc = document as any;
-
-        if (typeof doc.hidden !== "undefined") {
-            hidden = "hidden";
-            visibilityChange = "visibilitychange";
-        } else if (typeof doc.msHidden !== "undefined") {
-            hidden = "msHidden";
-            visibilityChange = "msvisibilitychange";
-        } else if (typeof doc.webkitHidden !== "undefined") {
-            hidden = "webkitHidden";
-            visibilityChange = "webkitvisibilitychange";
-        }
-
-        document.addEventListener(visibilityChange, () => {
-            if (document[hidden]) {
-                this.stop();
-            } else {
-                this.start();
-            }
-        }, false);
     }
 
     private getTime() {

@@ -20,7 +20,7 @@ export declare class ParticleSystem {
     removeEmitter(emitter: ParticleEmitter): void;
     update(delta: number): void;
     render(): void;
+    destroy(): void;
     private run();
-    private setVisabilityManagement();
     private getTime();
 }
