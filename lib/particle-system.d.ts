@@ -3,6 +3,7 @@ import { IpsOptions } from "./model/ips-options";
 import { IpsEmitterOptions } from "./model/ips-emitter-options";
 import { Observable } from "rxjs/Observable";
 export declare class ParticleSystem {
+    private canvas;
     onLoad: Observable<string>;
     private particleEmitters;
     private context;
@@ -12,6 +13,8 @@ export declare class ParticleSystem {
     private fps;
     private intervalTimer;
     private color;
+    private intersectionWatcher;
+    private running;
     constructor(options: IpsOptions, canvas: HTMLCanvasElement, width: number, height: number);
     start(): void;
     stop(): void;
@@ -23,4 +26,5 @@ export declare class ParticleSystem {
     destroy(): void;
     private run();
     private getTime();
+    private addViewPortListeners();
 }

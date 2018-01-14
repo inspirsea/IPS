@@ -16,23 +16,34 @@ export class ParticleSystem {
     private fps = 60;
     private intervalTimer: number;
     private color: [number, number, number, number];
+    private intersectionWatcher: IntersectionObserver;
+    private running = false;
 
-    constructor(options: IpsOptions, canvas: HTMLCanvasElement, width: number, height: number) {
+    constructor(options: IpsOptions, private canvas: HTMLCanvasElement, width: number, height: number) {
         this.context = new Context(options, canvas);
         this.onLoad = this.context.onLoad();
         this.width = width;
         this.height = height;
         let color = Util.colorHexToGl(options.color);
         this.color = [color[0], color[1], color[2], options.alpha];
+        if(options.startOnEntry) {
+            this.addViewPortListeners();
+        }
     }
 
     public start() {
-        this.time = this.getTime();
-        this.intervalTimer = setInterval(this.run(), 0);
+        if (!this.running) {
+            this.running = true;
+            this.time = this.getTime();
+            this.intervalTimer = setInterval(this.run(), 0);
+        }
     }
 
     public stop() {
-        clearInterval(this.intervalTimer);
+        if (this.running) {
+            clearInterval(this.intervalTimer);
+            this.running = false;
+        }
     }
 
     public setSize(width: number, height: number) {
@@ -93,5 +104,19 @@ export class ParticleSystem {
 
     private getTime() {
         return +Date.now().toString().slice(5);
+    }
+
+    private addViewPortListeners() {
+        this.intersectionWatcher = new IntersectionObserver((intersectionObservers: IntersectionObserverEntry[]) => {
+            for (let observer of intersectionObservers) {
+                if (observer.isIntersecting) {
+                    this.start();
+                } else {
+                    this.stop();
+                }
+            }
+        });
+
+        this.intersectionWatcher.observe(this.canvas);
     }
 }

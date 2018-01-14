@@ -40,6 +40,17 @@ Live demo!
 
 **textures**: Custom textures
 
+**startOnEntry**: Start particle system when canvas enters viewport stops when not in viewport. Default true;
+
+
+To start particle system when startOnEntry is False.
+
+```sh
+        particleSystem.onLoad.subscribe(it => {
+            particleSystem.start();
+        });
+```
+
 #### Example
 
 ```sh
