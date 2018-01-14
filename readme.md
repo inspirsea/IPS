@@ -46,9 +46,9 @@ Live demo!
 To start particle system when startOnEntry is False.
 
 ```sh
-    particleSystem.onLoad.subscribe(it => {
-        particleSystem.start();
-    });
+particleSystem.onLoad.subscribe(it => {
+    particleSystem.start();
+});
 ```
 
 #### Example
